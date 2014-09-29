@@ -1,0 +1,53 @@
+.captcha  {
+	img {
+		border:1px solid @input-border;
+		margin:0 20px 10px 0;
+	}
+}
+.form-control,
+kbd {
+	.box-shadow(none);
+}
+
+.form-group {
+	.img {
+		border:1px solid #ccc;
+		padding:3px;
+		margin:10px 0;
+	}
+	.file {
+		margin:10px 0;
+	}
+}
+
+.grid-view .filters {
+	input,
+	select {
+		width:100%;
+	}
+}
+
+fieldset {
+	border:1px solid @legend-border-color;
+	padding:10px 20px;
+	margin-top:-15px;
+	margin-bottom:30px;
+}
+legend {
+	border:none;
+	margin-bottom:0;
+	display:inline-block;
+	width:auto;
+	padding:0 10px;
+	margin-left:-10px;
+	color:@gray;
+}
+
+.form-horizontal {
+  // Only right align form labels here when the columns stop stacking
+  @media (min-width: @screen-sm-min) {
+    .control-label {
+      text-align: left;
+    }
+  }
+}

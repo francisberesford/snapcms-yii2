@@ -1,0 +1,49 @@
+#!/bin/bash
+
+echo "";
+echo -e "\e[36m ------------- "
+echo -e " -- SnapCMS -- "
+echo -e " ------------- \e[0m"
+
+if [ $# -eq 0 ]; then
+	echo "Usage: snapcms [arg] "
+	echo "snapcms tests - Runs tests";
+	echo "snapcms docs  - Generates Documentation";
+	echo "snapcms all   - Run all of the above";
+    exit 1
+fi
+
+if [[ $1 == tests || $1 == all ]]; then
+
+	echo "";
+	echo "";
+	echo -e "\e[32m -- Running Migration -- \e[0m"
+	echo "";
+
+	./tests/unit/yii migrate
+
+	echo "";
+	echo "";
+	echo -e "\e[32m -- Running Tests -- \e[0m"
+	echo "";
+
+	../../bin/codecept run tests/unit/
+fi
+
+if [[ $1 == docs || $1 == all ]]; then
+	echo "";
+	echo "";
+	echo "";
+	echo -e "\e[32m -- Generating Documentation -- \e[0m"
+	echo "";
+
+	../../bin/apidoc guide ./guide ./docs <<-EOF
+	yes
+	EOF
+	../../bin/apidoc api models/ ./docs <<-EOF
+	yes
+	EOF
+	../../bin/apidoc guide ./guide ./docs <<-EOF
+	yes
+	EOF
+fi

@@ -1,0 +1,35 @@
+/*h1, .h1,
+h2, .h2,
+h3, .h3 {
+  margin-top: 0;
+}*/
+/* line 6, D:\www\snapcms-yii2\vendor\snapfrozen\snapcms\bootstrap\inc\_content.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/www\/snapcms-yii2\/vendor\/snapfrozen\/snapcms\/bootstrap\/inc\/_content\.less}line{font-family:\000036}}
+.media {
+  border-top: 1px solid #ddd;
+}
+/* line 9, D:\www\snapcms-yii2\vendor\snapfrozen\snapcms\bootstrap\inc\_content.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/www\/snapcms-yii2\/vendor\/snapfrozen\/snapcms\/bootstrap\/inc\/_content\.less}line{font-family:\000039}}
+.media:first-child {
+  border: none;
+}
+/* line 11, D:\www\snapcms-yii2\vendor\snapfrozen\snapcms\bootstrap\inc\_content.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/www\/snapcms-yii2\/vendor\/snapfrozen\/snapcms\/bootstrap\/inc\/_content\.less}line{font-family:\0000311}}
+.media:first-child h3 {
+  margin-top: 0;
+}
+/* For logs */
+/* line 17, D:\www\snapcms-yii2\vendor\snapfrozen\snapcms\bootstrap\inc\_content.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/www\/snapcms-yii2\/vendor\/snapfrozen\/snapcms\/bootstrap\/inc\/_content\.less}line{font-family:\0000317}}
+.alert-trace {
+  background-color: #fafafa;
+  border-color: #ccc;
+  color: #333;
+}
+/* line 22, D:\www\snapcms-yii2\vendor\snapfrozen\snapcms\bootstrap\inc\_content.less */
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/www\/snapcms-yii2\/vendor\/snapfrozen\/snapcms\/bootstrap\/inc\/_content\.less}line{font-family:\0000322}}
+.alert-error {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+}

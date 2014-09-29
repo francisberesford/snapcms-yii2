@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="en" />
+    <link href="./assets/d587c807/css/bootstrap.css" rel="stylesheet">
+<link href="./assets/bb246064/style.css" rel="stylesheet">
+<script src="./assets/9fce7351/jquery.js"></script>
+<script src="./assets/d587c807/js/bootstrap.js"></script>    <title>Yii Framework 2.0 API Documentation</title>
+</head>
+<body>
+
+<div class="wrap">
+    <nav id="w0" class="navbar-inverse navbar-fixed-top navbar" role="navigation"><div class="navbar-header"><button class="navbar-toggle" data-toggle="collapse" data-target="#w0-collapse"><span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="./index.html">Yii Framework 2.0 API Documentation</a></div><div id="w0-collapse" class="collapse navbar-collapse"><ul id="w1" class="navbar-nav nav"><li><a href="./index.html">Class reference</a></li>
+<li><a href="./guide-index.html">Guide</a></li></ul></div></nav>
+    
+<div class="row">
+    <div class="col-md-2">
+                <div id="navigation" class="list-group"><a class="list-group-item" href="./guide-index.html">Index</a>
+<a class="list-group-item active" href="./guide-features-configuration.html">Configuration</a>
+<a class="list-group-item" href="./guide-start-installation.html">Installation</a>
+<a class="list-group-item" href="./guide-utils-maintenance-script.html">Maintenance Script</a>
+<a class="list-group-item" href="./guide-features-user-permissions.html">User Permissions</a></div>    </div>
+    <div class="col-md-9 guide-content" role="main">
+        <h1>Configuration <a href="#configuration" name="configuration">&para;</a></h1>
+<p>SnapCMS configurations contain arbitrary configuration options used by your application. They are a replacement for Yii2's "params" and 
+are found in your <code>/common/config/snapcms/</code> or <code>/frontend/config/snapcms/</code> folders. </p>
+<p>Associative arrays should be nested into logical groupings for clarity. Here is an example of <code>general.php</code> included in the installation.</p>
+<pre><code class="language-php"><span style="color: #0000BB"></span><span style="color: #007700">return&nbsp;[<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'menus'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'main_menu'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'Main&nbsp;Menu'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'footer'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'Footer'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;],<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'site'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'default_menu'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'main_menu'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'homepage'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'title'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'SnapCMS'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'tag_line'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'A&nbsp;CMS&nbsp;for&nbsp;developers&nbsp;and&nbsp;users'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'admin_email'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'webmaster@example.com'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;],<br />];</span></code></pre>
+<p>Configurations are accessed via the <strong>Config</strong> model's <strong>getData()</strong> method e.g. </p>
+<pre><code class="language-php"><span style="color: #0000BB">$title&nbsp;</span><span style="color: #007700">=&nbsp;&nbsp;\</span><span style="color: #0000BB">snapcms</span><span style="color: #007700">\</span><span style="color: #0000BB">models</span><span style="color: #007700">\</span><span style="color: #0000BB">Config</span><span style="color: #007700">::</span><span style="color: #0000BB">getData</span><span style="color: #007700">(</span><span style="color: #DD0000">'general/site.title'</span><span style="color: #007700">);</span></code></pre>
+<p>This command tells the system that you wish to access information in the <code>snapcms/general.php</code> file at the location <code>['site']['title']</code> in the array. It will look for this value in the following files (and in this order):</p>
+<ol>
+<li><code>/common/config/snapcms/general.php</code></li>
+<li><code>/common/config/snapcms/general-local.php</code></li>
+<li><code>/frontend/config/snapcms/general.php</code></li>
+<li><code>/frontend/config/snapcms/general-local.php</code></li>
+</ol>
+<p>This gives you the flexibility to define configurations based on environment in the same way allowed by Yii2's advanced application template.</p>
+<h2>Database Overrides <a href="#database-overrides" name="database-overrides">&para;</a></h2>
+<p>If you wish to allow the end user to override certain configuration values, you can activate this on a per configuration basis. 
+This is done in the file located at <code>/common/config/snapcms/_allow_db_override.php</code>. Here you can add the 
+string representation of the configuration you wish to be available from the SnapCMS admin interface found at <strong>Administration -&gt; Settings</strong>.</p>
+<p>Example:</p>
+<pre><code class="language-php"><span style="color: #0000BB"></span><span style="color: #007700">return&nbsp;[<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'general/site.title'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'general/site.tag_line'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'general/site.homepage'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//'class'&nbsp;=&gt;&nbsp;'\snapcms\models\Config',<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'rules'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[[</span><span style="color: #DD0000">'integer'</span><span style="color: #007700">]],<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'input'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'method'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'dropDownList'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//The&nbsp;parameters&nbsp;in&nbsp;the&nbsp;order&nbsp;they&nbsp;appear&nbsp;in&nbsp;the&nbsp;method&nbsp;chosen&nbsp;above<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'params'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'Homepage'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">2&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'Another&nbsp;Page'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br />&nbsp;&nbsp;&nbsp;&nbsp;],<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'email/email.from_name'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'email/email.from_address'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'rules'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[[</span><span style="color: #DD0000">'email'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'skipOnEmpty'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">]],<br />&nbsp;&nbsp;&nbsp;&nbsp;],<br />];</span></code></pre>
+<p>By default the settings will render a textField input and validate the length at 255 characters.
+You are able to define additional validation rules and change the type of input that will be displayed on the settings page.
+Note that the rule arrays are the same as the standard Yii definitions but without the attributes array.</p>
+<pre><code class="language-php"><span style="color: #0000BB"></span><span style="color: #007700">[</span><span style="color: #FF8000">/*['birthdate'],*/&nbsp;</span><span style="color: #DD0000">'validateAge'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'params'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[</span><span style="color: #DD0000">'min'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'12'</span><span style="color: #007700">],&nbsp;</span><span style="color: #DD0000">'skipOnEmpty'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">],</span></code></pre>
+    </div>
+</div>
+
+
+</div>
+
+<footer class="footer">
+        <p class="pull-right"><small>Page generated on Mon, 30 Jun 2014 08:32:26 +0000</small></p>
+    Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
+
+<script type="text/javascript">jQuery(document).ready(function () {
+    var shiftWindow = function () { scrollBy(0, -50) };
+    if (location.hash) shiftWindow();
+    window.addEventListener("hashchange", shiftWindow);
+});</script></body>
+</html>

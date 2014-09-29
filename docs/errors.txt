@@ -1,0 +1,122 @@
+Array
+(
+    [0] => Array
+        (
+            [line] => 15
+            [file] => models\Config.php
+            [message] => No docblock for element '$_configCache'
+        )
+
+    [1] => Array
+        (
+            [line] => 15
+            [file] => models\Config.php
+            [message] => No docblock for element '$_configCache'
+        )
+
+    [2] => Array
+        (
+            [line] => 15
+            [file] => models\Config.php
+            [message] => No short description for element '$_configCache'
+        )
+
+    [3] => Array
+        (
+            [line] => 15
+            [file] => models\Config.php
+            [message] => No short description for element '$_configCache'
+        )
+
+    [4] => Array
+        (
+            [line] => 16
+            [file] => models\Config.php
+            [message] => No docblock for element '$validator'
+        )
+
+    [5] => Array
+        (
+            [line] => 16
+            [file] => models\Config.php
+            [message] => No short description for element '$validator'
+        )
+
+    [6] => Array
+        (
+            [line] => 17
+            [file] => models\Config.php
+            [message] => No docblock for element '$validatorOptions'
+        )
+
+    [7] => Array
+        (
+            [line] => 17
+            [file] => models\Config.php
+            [message] => No short description for element '$validatorOptions'
+        )
+
+    [8] => Array
+        (
+            [line] => 18
+            [file] => models\Config.php
+            [message] => No docblock for element '$rules'
+        )
+
+    [9] => Array
+        (
+            [line] => 18
+            [file] => models\Config.php
+            [message] => No short description for element '$rules'
+        )
+
+    [10] => Array
+        (
+            [line] => 162
+            [file] => models\Config.php
+            [message] => Undefined parameter documented: $catgory in getOverrideArrayTree().
+        )
+
+    [11] => Array
+        (
+            [line] => 15
+            [file] => models\search\ConfigSearch.php
+            [message] => No docblock for element 'rules'
+        )
+
+    [12] => Array
+        (
+            [line] => 22
+            [file] => models\search\ConfigSearch.php
+            [message] => No docblock for element 'scenarios'
+        )
+
+    [13] => Array
+        (
+            [line] => 28
+            [file] => models\search\ConfigSearch.php
+            [message] => No docblock for element 'search'
+        )
+
+    [14] => Array
+        (
+            [line] => 15
+            [file] => models\search\UserSearch.php
+            [message] => No docblock for element 'rules'
+        )
+
+    [15] => Array
+        (
+            [line] => 23
+            [file] => models\search\UserSearch.php
+            [message] => No docblock for element 'scenarios'
+        )
+
+    [16] => Array
+        (
+            [line] => 29
+            [file] => models\search\UserSearch.php
+            [message] => No docblock for element 'search'
+        )
+
+)
