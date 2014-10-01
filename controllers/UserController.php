@@ -15,7 +15,7 @@ use yii\filters\AccessControl;
  */
 class UserController extends SnapCMSController
 {    
-    public $layout = 'column2';
+    public $layout = '//column2';
     
     public function behaviors()
     {
@@ -105,7 +105,7 @@ class UserController extends SnapCMSController
             Yii::$app->session->setFlash('success', Yii::t('snapcms', 'User Created'));
             return $this->redirect(['index']);
         } else {
-            $this->layout = 'main';
+            $this->layout = '//main';
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -126,7 +126,7 @@ class UserController extends SnapCMSController
             Yii::$app->session->setFlash('success', Yii::t('snapcms', 'User Updated'));
             return $this->redirect(['index']);
         } else {
-            $this->layout = 'main';
+            $this->layout = '//main';
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -193,7 +193,7 @@ class UserController extends SnapCMSController
         $selectedPermissions = $auth->getPermissionsByRole($role);
         //var_dump($selectedPermissions);
         
-        $this->layout = 'main';
+        $this->layout = '//main';
         return $this->render('groups', array(
             'currentRole' => $role,
             'roleNames' => $roleNames,
@@ -225,7 +225,7 @@ class UserController extends SnapCMSController
             }
         }
         
-        $this->layout = 'main';
+        $this->layout = '//main';
         return $this->render('create_role');
     }
     

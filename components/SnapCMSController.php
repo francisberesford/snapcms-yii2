@@ -13,7 +13,7 @@ use yii\web\Controller;
  */
 class SnapCMSController extends Controller
 {
-    public $primaryMenu = [];
+    public static $primaryMenu = [];
     
     public function init()
     {
@@ -26,10 +26,11 @@ class SnapCMSController extends Controller
             if(is_array($module)) {
                 $module = \Yii::$app->getModule($id);
             }
-            if(is_object($module) && is_subclass_of($module, '\snapcms\components\SnapCMSModule')) {
-                $this->primaryMenu = yii\helpers\ArrayHelper::merge(
-                    $this->primaryMenu,
-                    $module->primaryMenu
+            if(is_object($module) && is_subclass_of($module, '\snapcms\components\SnapCMSModule')) 
+            {
+                static::$primaryMenu = yii\helpers\ArrayHelper::merge(
+                    static::$primaryMenu,
+                    $module::$primaryMenu
                 );
             }
         }
@@ -38,50 +39,50 @@ class SnapCMSController extends Controller
     protected function initPrimaryMenu()
     {
         $user = \Yii::$app->user;
-        $this->primaryMenu = [
-            ['label' => 'View Site', 'url' => Yii::$app->urlManagerFrontend->createUrl(['site/index'])],
-            ['label' => 'Content', 'url' => ['/content/index'], 
+        self::$primaryMenu = [
+            'view_site' => ['label' => 'View Site', 'url' => Yii::$app->urlManagerFrontend->createUrl(['site/index'])],
+            'content' => ['label' => 'Content', 'url' => ['/content/index'], 
                 'visible' => 
                     $user->can('Create Content') || 
                     $user->can('Update Content') || 
                     $user->can('Delete Content') 
             ],
-            ['label' => 'Menus', 'url' => ['/menu/update'], 
+            'menus' => ['label' => 'Menus', 'url' => ['/menu/update'], 
                 'visible' => 
                     $user->can('Create Menu') || 
                     $user->can('Update Menu') || 
                     $user->can('Delete Menu') 
             ],
-            ['label' => 'Users', 'url' => ['/user/admin'],
+            'users' => ['label' => 'Users', 'url' => ['/user/index'],
                 'visible' => 
                     $user->can('Create User') || 
                     $user->can('Update User') || 
                     $user->can('Delete User') ||
                     $user->can('Manage User Groups'),
                 'items' => [
-                    ['label' => 'Users', 'url' => ['/user/index'], 
+                    'users' => ['label' => 'Users', 'url' => ['/user/index'], 
                         'visible' => 
                             $user->can('Create User') || 
                             $user->can('Update User') || 
                             $user->can('Delete User') 
                     ],
-                    ['label' => 'Groups', 'url' => ['/user/groups'], 
+                    'groups' => ['label' => 'Groups', 'url' => ['/user/groups'], 
                         'visible' => $user->can('Manage User Groups')],
                 ],
             ],
-            ['label' => 'Administration', 'url' => ['/user/admin'],
+            'administration' => ['label' => 'Administration', 'url' => ['/user/admin'],
                 'visible' => 
                     $user->can('Update Settings') || 
                     $user->can('Update Content Type Structure') || 
                     $user->can('View Logs'),
                 'items' => [
-                    ['label' => 'Settings', 'url' => ['/config/index'], 
+                    'settings' => ['label' => 'Settings', 'url' => ['/config/index'], 
                         'visible' => $user->can('Update Settings'),
                     ],
-                    ['label' => 'Content Types', 'url' => ['/content/content-types'], 
+                    'content_types' => ['label' => 'Content Types', 'url' => ['/content/content-types'], 
                         'visible' => $user->can('Update Content Type Structure'),
                     ],
-                    ['label' => 'Logs', 'url' => ['/site/logs'], 
+                    'logs' => ['label' => 'Logs', 'url' => ['/site/logs'], 
                         'visible' => $user->can('View Logs'),
                     ],
                 ],

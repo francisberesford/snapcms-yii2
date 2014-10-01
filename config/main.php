@@ -65,6 +65,12 @@ return [
             'class' => 'yii\rbac\DbManager',
             'defaultRoles' => ['Anonymous'],
         ],
+        'view' => [
+            'theme' => [
+                'pathMap' => ['@snapcms/views' => '@frontend/themes/snapcms'],
+                //'baseUrl' => '@web/themes/basic',
+            ],
+        ],
     ],
     //'params' => $params,
 ];

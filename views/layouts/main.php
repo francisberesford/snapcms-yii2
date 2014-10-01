@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use snapcms\components\SnapCMSController;
 
 $user = \Yii::$app->user;
 
@@ -37,7 +38,7 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav'],
             'activateParents' => true,
-            'items' => Yii::$app->controller->primaryMenu,
+            'items' => SnapCMSController::$primaryMenu,
         ]);
 
         echo Nav::widget([
