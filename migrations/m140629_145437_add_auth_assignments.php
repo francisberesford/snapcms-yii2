@@ -151,7 +151,6 @@ class m140629_145437_add_auth_assignments extends \yii\db\Migration
 
         $general=$auth->createPermission("General");
         $auth->add($general);
-        $auth->addChild($general, $accessBackend);
         $auth->addChild($general, $updateSettings);
         $auth->addChild($general, $updateContentTypeStructure);
         $auth->addChild($general, $viewLogs);
@@ -165,7 +164,6 @@ class m140629_145437_add_auth_assignments extends \yii\db\Migration
         $auth->addChild($editor, $manageUserGroups);
         $auth->addChild($editor, $content);
         $auth->addChild($editor, $menu);
-        $auth->addChild($editor, $accessBackend);
         $auth->addChild($editor, $viewUser);
 
         $admin=$auth->createRole("Admin");

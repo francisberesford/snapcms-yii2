@@ -5,8 +5,10 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use snapcms\components\SnapCMSController;
 
 $user = \Yii::$app->user;
+$fluid = isset(\Yii::$app->controller->layoutFluid) && \Yii::$app->controller->layoutFluid === true ? '-fluid' : '';
 
 /**
  * @var \yii\web\View $this
@@ -20,6 +22,7 @@ AppAsset::register($this);
     <head>
         <meta charset="<?= Yii::$app->charset ?>"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
@@ -37,7 +40,7 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav'],
             'activateParents' => true,
-            'items' => Yii::$app->controller->primaryMenu,
+            'items' => SnapCMSController::$primaryMenu,
         ]);
 
         echo Nav::widget([

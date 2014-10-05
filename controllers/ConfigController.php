@@ -14,7 +14,7 @@ use yii\filters\VerbFilter;
  */
 class ConfigController extends SnapCMSController
 {
-    public $layout = 'main';
+    public $layout = '//main';
     
     public function behaviors()
     {

@@ -5,6 +5,6 @@ use Yii;
 
 abstract class SnapCMSModule extends \yii\base\Module
 {
-    public $primaryMenu = [];
-    public $secondaryMenu = [];
+    static $primaryMenu = [];
+    public static $secondaryMenu = [];
 }

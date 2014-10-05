@@ -43,7 +43,7 @@ use yii\filters\VerbFilter;
  */
 class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->baseControllerClass) . "\n" ?>
 {
-    public $layout = 'column2';
+    public $layout = '//column2';
     
     public function behaviors()
     {
@@ -97,7 +97,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
             Yii::$app->session->setFlash('success', <?= $generator->generateString($humanLabel . ' Created') ?>);
             return $this->redirect(['index']);
         } else {
-            $this->layout = 'main';
+            $this->layout = '//main';
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -118,7 +118,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
             Yii::$app->session->setFlash('success', <?= $generator->generateString($humanLabel . ' Updated') ?>);
             return $this->redirect(['index']);
         } else {
-            $this->layout = 'main';
+            $this->layout = '//main';
             return $this->render('update', [
                 'model' => $model,
             ]);

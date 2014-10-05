@@ -190,4 +190,12 @@ class User extends ActiveRecord implements IdentityInterface
     public static function isSystemRole($role) {
         return in_array($role, self::$systemRoles);
     }
+    
+    public static function getStatusLabels()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_DELETED => 'Deleted',
+        ];
+    }
 }

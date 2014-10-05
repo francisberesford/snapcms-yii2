@@ -38,7 +38,7 @@ $this->params['header'] = $this->title;
     
     <div class="panel panel-primary">
         <div class="panel-heading">
-            Advanced Search
+            &nbsp;
         </div>
         <div class="panel-body">
 
