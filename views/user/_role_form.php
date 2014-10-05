@@ -16,6 +16,6 @@ use yii\widgets\ActiveForm;
             <?= Html::label('Role Name', 'role', ['class' => 'control-label']) ?>
             <?= Html::textInput('role', isset($role) ? $role->name : '', ['class' => 'form-control']); ?>
         </div>
-        <?= $this->render('/global/_form_sidebar') ?>
+        <?= $this->render('//global/_form_sidebar', ['showSaveButton' => true]) ?>
     <?php ActiveForm::end(); ?>
 </div>

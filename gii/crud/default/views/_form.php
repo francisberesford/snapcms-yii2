@@ -36,6 +36,6 @@ use yii\widgets\ActiveForm;
     echo "      <?= " . $generator->generateActiveField($attribute) . " ?>\n\n";
 } ?>
         </div>
-    <?= "<?= \$this->render('/global/_form_sidebar') ?>" ?>
+    <?= "<?= \$this->render('//global/_form_sidebar', ['showSaveButton' => true]) ?>" ?>
     <?= "<?php " ?>ActiveForm::end(); ?>
 </div>

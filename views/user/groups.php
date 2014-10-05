@@ -76,6 +76,6 @@ $this->params['headerSubtext'] = $currentRole;
         <?php endforeach; ?>
     </div>
     
-    <?= $this->render('/global/_form_sidebar',['showSaveButton'=>true]) ?>
+    <?= $this->render('//global/_form_sidebar',['showSaveButton'=>true]) ?>
 </div>
 <?php ActiveForm::end(); ?>

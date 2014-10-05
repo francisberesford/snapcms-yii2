@@ -21,6 +21,6 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'role')->textInput() ?>
             <?= $form->field($model, 'status')->textInput() ?>
         </div>
-        <?= $this->render('/global/_form_sidebar') ?>
+        <?= $this->render('//global/_form_sidebar', ['showSaveButton' => true]) ?>
     <?php ActiveForm::end(); ?>
 </div>

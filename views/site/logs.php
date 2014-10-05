@@ -42,5 +42,5 @@ $this->params['header'] = $this->title;
             ]) ?>
         </div>
     </div>
-    <?= $this->render('/global/_form_sidebar') ?>
+    <?= $this->render('//global/_form_sidebar') ?>
 </div>
