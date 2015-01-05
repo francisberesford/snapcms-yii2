@@ -44,19 +44,20 @@ return [
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'baseUrl' => '',
             'rules' => [
-                '../<controller:\w+>/<action:\w+>' => '<controller>/<action>'
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>'
             ],        
         ],
         'i18n' => [
             'translations' => [
                 'snapcms*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    //'basePath' => '@app/messages',
-                    //'sourceLanguage' => 'en',
+                    'basePath' => '@snapcms/messages',
+                    //'sourceLanguage' => 'en-US',
                     'fileMap' => [
-                        'snapcms' => 'snapcms.php',
-                        'snapcms/error' => 'error.php',
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
                     ],
                 ],
             ],

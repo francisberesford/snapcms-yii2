@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use yii\helpers\ArrayHelper;
 
 /**
  * User model
@@ -197,5 +198,12 @@ class User extends ActiveRecord implements IdentityInterface
             self::STATUS_ACTIVE => 'Active',
             self::STATUS_DELETED => 'Deleted',
         ];
+    }
+    
+    public function getStatus_label($type=null)
+    {
+        $types = self::getStatusLabels();
+        $type = $type ? $type : $this->status;
+        return ArrayHelper::getValue($types, $type, Yii::t('pvsell', 'Status not found!'));
     }
 }

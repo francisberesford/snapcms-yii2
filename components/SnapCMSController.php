@@ -53,6 +53,12 @@ class SnapCMSController extends Controller
                     $user->can('Update Menu') || 
                     $user->can('Delete Menu') 
             ],
+            'media' => ['label' => 'Media', 'url' => ['/media/index'], 
+                'visible' => 
+                    $user->can('Create Content') || 
+                    $user->can('Update Content') || 
+                    $user->can('Delete Content') 
+            ],
             'users' => ['label' => 'Users', 'url' => ['/user/index'],
                 'visible' => 
                     $user->can('Create User') || 
