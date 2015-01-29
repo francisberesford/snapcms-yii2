@@ -19,7 +19,7 @@ trait MediaFiles
                 $Media = Media::findOne($this->$attribute);
             }
             
-            //Our media item as dissapeared! (maybe from deletion in the media manager
+            //Our media item as dissapeared! (maybe from deletion in the media manager)
             if(!$Media) {
                 $Media = new Media;
                 $this->$attribute = null;
@@ -40,11 +40,13 @@ trait MediaFiles
                 $Media->filename = $uploadFile;
                 $Media->mime_type = $uploadFile->type;
                 $Media->extension = pathinfo($uploadFile->name, PATHINFO_EXTENSION);
+                //FB - I guess we don't use titles when adding from the front end?
                 //if(empty($Media->title)) {
                     //remove extension from the title
                     $Media->title = basename($uploadFile->name, '.'.$Media->extension);
                 //}
                 $Media->save();
+                $Media->generateTags($this,  $attribute);
                 $this->$attribute = $Media->id;
             }
         }

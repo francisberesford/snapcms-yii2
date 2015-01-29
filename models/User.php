@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\helpers\ArrayHelper;
+use snapcms\models\Config;
 
 /**
  * User model
@@ -101,7 +102,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByPasswordResetToken($token)
     {
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        $expire = Config::getData('general/security.passwordResetTokenExpire');
         $parts = explode('_', $token);
         $timestamp = (int) end($parts);
         if ($timestamp + $expire < time()) {

@@ -129,5 +129,35 @@ class Media extends \yii\db\ActiveRecord
         
         return $output;
     }
+    
+    public function getTags()
+    {
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
+            ->viaTable('{{%media_tags}}', ['media_id' => 'id']);
+    }
+
+    public function generateTags($model, $attribute)
+    {
+        $name = (new \ReflectionClass($model))->getShortName();
+        $ParentTag = Tag::findOne(['name' => $name]);
+        if(!$ParentTag) 
+        {
+            $ParentTag = new Tag();
+            $ParentTag->name = $name;
+            $ParentTag->save();
+        }
+        $this->link('tags', $ParentTag);
+        
+        $attrName = $model->getAttributeLabel($attribute);
+        $ChildTag = Tag::findOne(['parent' => $ParentTag->id, 'name' => $attrName]);
+        if(!$ChildTag) 
+        {
+            $ChildTag = new Tag();
+            $ChildTag->name = $name;
+            $ChildTag->parent = $ParentTag->id;
+            $ChildTag->save();
+        }
+        $this->link('tags', $ChildTag);
+    }
 
 }

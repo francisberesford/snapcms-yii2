@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
+use yii\widgets\menu;
+use snapcms\models\Tag;
 
 /* @var $this yii\web\View */
 /* @var $searchModel snapcms\models\search\MediaSearch */
@@ -34,6 +36,18 @@ $this->params['menu'] = [
             ]); ?>
         </div>
         <?= $this->render('//global/_form_sidebar') ?>
+        <div id="sidebar" class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Filter
+                </div>
+                <div class="panel-body">
+                    <?= Menu::widget([
+                        'items' => array_merge([['label' => 'None', 'url' => ['media/index']]] , Tag::getList())
+                    ]); ?>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

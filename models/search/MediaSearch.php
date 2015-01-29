@@ -50,6 +50,14 @@ class MediaSearch extends Media
         if ($this->load($params) && !$this->validate()) {
             return $dataProvider;
         }
+        
+        if(isset($params['filter']))
+        {
+            $query->joinWith(['tags']);
+            $query->andFilterWhere([
+                'tag_id' => $params['filter']
+            ]);
+        }
 
         $query->andFilterWhere([
             'id' => $this->id,
