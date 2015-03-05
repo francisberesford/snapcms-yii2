@@ -6,7 +6,7 @@
  */
 
 //use yii\grid\GridView;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 $this->title = Yii::t('snapcms', 'Settings');

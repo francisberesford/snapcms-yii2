@@ -16,10 +16,23 @@ use yii\widgets\ActiveForm;
         ]
     ]); ?>
         <div class="col-md-9">
-            <?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
-            <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
-            <?= $form->field($model, 'role')->textInput() ?>
-            <?= $form->field($model, 'status')->textInput() ?>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+                <li><a href="#groups" data-toggle="tab">Groups</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="details" class="tab-pane active">
+                    <?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
+                    <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
+                    <?= $form->field($model, 'role')->textInput() ?>
+                    <?= $form->field($model, 'status')->textInput() ?>
+                </div>
+                <div id="groups" class="tab-pane">
+                    <div class="form-group">
+                        <?php //echo CHtml::checkBoxList('UserGroups', CHtml::listData($userGroups, 'name', 'name'), CHtml::listData($groups, 'name', 'name'));?>
+                    </div>
+                </div>
+            </div>
         </div>
         <?= $this->render('//global/_form_sidebar', ['showSaveButton' => true]) ?>
     <?php ActiveForm::end(); ?>

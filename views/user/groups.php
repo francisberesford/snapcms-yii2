@@ -62,7 +62,7 @@ $this->params['headerSubtext'] = $currentRole;
         <fieldset>
             <legend><?= $groupPerm?></legend>
             <?php foreach($auth->getChildren($groupPerm) as $perm => $data): ?>
-            <div class="checkbox row">
+            <div class="checkbox clearfix">
                 <?php $name = "auth[$currentRole][$perm]"; ?>
                 <?php $id = Inflector::slug($name); ?>
                 <label for="<?= $id ?>" class="col-md-6">
