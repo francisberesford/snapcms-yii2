@@ -85,16 +85,12 @@ class Media extends \yii\db\ActiveRecord
         parent::afterSave($insert, $changedAttributes);
 
         $field = 'filename';
-        $dataDir = Yii::getAlias('@frontend/data');
 
-        $dirPath = $dataDir . '/media';
+        $dirPath = $this->dir_path;
         if (!file_exists($dirPath)) {
             mkdir($dirPath, 0777, true);
         }
-        
-        $filePath = $dirPath . '/' . $field . '_' . $this->id;
-
-        if ($this->$field instanceof \yii\web\UploadedFile && !$this->$field->saveAs($filePath)) {
+        if ($this->$field instanceof \yii\web\UploadedFile && !$this->$field->saveAs($this->file_path)) {
             $this->addError($field, Yii::t('snapcms', 'There was a problem uploading this file'));
         }
 
@@ -104,12 +100,12 @@ class Media extends \yii\db\ActiveRecord
     public function getIcon()
     {
         $output = '';
-        //var_dump($this->mime_type);
         switch($this->mime_type)
         {
             case 'text/plain':
                 $output .= '<span class="fa fa-file-text-o"></span>';
                 break;
+            case 'text/csv':
             case 'application/vnd.ms-excel':
             case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
                 $output .= '<span class="fa fa-file-excel-o"></span>';
@@ -158,6 +154,27 @@ class Media extends \yii\db\ActiveRecord
             $ChildTag->save();
         }
         $this->link('tags', $ChildTag);
+    }
+    
+    public function getDir_path()
+    {
+        $dataDir = Yii::getAlias('@frontend/data');
+        return $dataDir . '/media';
+    }
+    
+    public function getFile_path() 
+    {
+        return $this->dir_path . '/filename_' . $this->id;
+    }
+    
+    public function getCsvData()
+    {
+        $data = [];
+        $file = fopen($this->file_path, "r");
+        while(! feof($file)) {
+            $data[] = fgetcsv($file);
+        }
+        return $data;
     }
 
 }
