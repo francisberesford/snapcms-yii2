@@ -8,7 +8,6 @@ use yii\helpers\Html;
 
 trait MediaFiles
 {
-    
     public function beforeSave($insert)
     {
         foreach($this->_mediaFiles as $attribute => $config)
@@ -50,14 +49,14 @@ trait MediaFiles
                 $this->$attribute = $Media->id;
             }
         }
-
+        
         return parent::beforeSave($insert);
     }
     
     public function afterSave($insert, $changedAttributes) 
     {
         parent::afterSave($insert, $changedAttributes);
-
+        
         $field = 'filename';
         $dataDir = Yii::getAlias('@frontend/data');
 
@@ -71,6 +70,11 @@ trait MediaFiles
             if(!empty($this->$attribute)) {
                 $Media = Media::findOne($this->$attribute);
             } else {
+                continue;
+            }
+            
+            //Record was probably deleted
+            if(!$Media) {
                 continue;
             }
             

@@ -21,22 +21,6 @@ class m150105_083708_create_media_table extends Migration
                 'updated_by' => Schema::TYPE_INTEGER,
             ]
         );
-/*
-CREATE TABLE `snap_media` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `filename` varchar(255) DEFAULT NULL,
-  `mime_type` varchar(45) DEFAULT NULL,
-  `extension` varchar(45) DEFAULT NULL,
-  `is_public` tinyint(4) DEFAULT '1',
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
- 
- */
     }
 
     public function down()

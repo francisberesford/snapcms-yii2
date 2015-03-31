@@ -16,7 +16,7 @@
         ]); ?>
     </span>
     
-    <a data-pjax="0" title="" href="/admin/pvsell/pricing/update?id=5" data-original-title="Update"></a> 
-    <a data-pjax="0" data-method="post" data-confirm="Are you sure you want to delete this item?" title="" href="/admin/pvsell/pricing/delete?id=5" data-original-title="Delete"></a></td>
+    <a data-pjax="0" title="" data-original-title="Update"></a> 
+    <a data-pjax="0" data-method="post" data-confirm="Are you sure you want to delete this item?" title="" data-original-title="Delete"></a></td>
     
 </div>

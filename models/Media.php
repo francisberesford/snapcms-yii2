@@ -131,6 +131,13 @@ class Media extends \yii\db\ActiveRecord
         return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
             ->viaTable('{{%media_tags}}', ['media_id' => 'id']);
     }
+    
+    public function hasTag($Tag)
+    {
+        $query = $this->getTags();
+        $query->where(['{{%tags}}.id' => $Tag->id]);
+        return $query->count() ? true : false;
+    }
 
     public function generateTags($model, $attribute)
     {
@@ -142,18 +149,23 @@ class Media extends \yii\db\ActiveRecord
             $ParentTag->name = $name;
             $ParentTag->save();
         }
-        $this->link('tags', $ParentTag);
+        
+        if(!$this->hasTag($ParentTag)) {
+            $this->link('tags', $ParentTag);
+        }
         
         $attrName = $model->getAttributeLabel($attribute);
         $ChildTag = Tag::findOne(['parent' => $ParentTag->id, 'name' => $attrName]);
         if(!$ChildTag) 
         {
             $ChildTag = new Tag();
-            $ChildTag->name = $name;
+            $ChildTag->name = $attrName;
             $ChildTag->parent = $ParentTag->id;
             $ChildTag->save();
         }
-        $this->link('tags', $ChildTag);
+        if(!$this->hasTag($ChildTag)) {
+            $this->link('tags', $ChildTag);
+        }
     }
     
     public function getDir_path()
@@ -171,8 +183,11 @@ class Media extends \yii\db\ActiveRecord
     {
         $data = [];
         $file = fopen($this->file_path, "r");
-        while(! feof($file)) {
-            $data[] = fgetcsv($file);
+        while(!feof($file)) {
+            $line = fgetcsv($file);
+            if($line) {
+                $data[] = $line;
+            }
         }
         return $data;
     }
