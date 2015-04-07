@@ -42,7 +42,7 @@ trait MediaFiles
                 //FB - I guess we don't use titles when adding from the front end?
                 //if(empty($Media->title)) {
                     //remove extension from the title
-                    $Media->title = basename($uploadFile->name, '.'.$Media->extension);
+                    $Media->title = basename($uploadFile->name, '.' . $Media->extension) . ' (' . $this->id . ')';
                 //}
                 $Media->save();
                 $Media->generateTags($this,  $attribute);

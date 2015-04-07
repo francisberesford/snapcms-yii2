@@ -181,8 +181,11 @@ class Media extends \yii\db\ActiveRecord
     
     public function getCsvData()
     {
+        $file = @fopen($this->file_path, "r");
+        if(!$file)
+            return false;
+     
         $data = [];
-        $file = fopen($this->file_path, "r");
         while(!feof($file)) {
             $line = fgetcsv($file);
             if($line) {
