@@ -118,21 +118,10 @@ class Config extends \yii\db\ActiveRecord
     {
         $aCommon = $aCommonLocal = $aLocation = $aLocationLocal = [];
         
-        $commonConfPath = Yii::getAlias("@common/config/snapcms/$file.php", false);
-        $commonConfPathLocal = Yii::getAlias("@common/config/snapcms/$file-local.php", false);
         $confPath = Yii::getAlias("@$location/config/snapcms/$file.php", false);
-        $confPathLocal = Yii::getAlias("@$location/config/snapcms/$file-local.php", false);
+        $confPathLocal = Yii::getAlias("@$location/config/snapcms-local/$file.php", false);
         
         $fileFound = false;
-        
-        if(file_exists($commonConfPath)) {
-            $aCommon = require($commonConfPath);
-            $fileFound = true;
-        }
-        if(file_exists($commonConfPathLocal)) {
-            $aCommonLocal = require($commonConfPathLocal);
-            $fileFound = true;
-        }
         if(file_exists($confPath)) {
             $aLocation = require($confPath);
             $fileFound = true;
