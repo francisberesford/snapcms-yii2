@@ -21,12 +21,12 @@ if(!User::isSystemRole($currentRole))
 {
     $this->params['menu'][] = [
         'label' => '<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('snapcms', 'Delete {modelClass}', ['modelClass' => 'Role']), 
-        'url' => ['delete-role', 'role' => $currentRole],
+        'url' => ['user/delete-role', 'role' => $currentRole],
         'linkOptions' => [
             'class' => 'text-danger',
             'data' => [
                 'confirm' => Yii::t('snapcms', 'Are you sure you want to delete this role?'),
-                'method' => 'post',
+                //'method' => 'post',
             ],
         ],
     ];

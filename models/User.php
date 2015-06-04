@@ -27,6 +27,7 @@ use snapcms\models\Config;
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
+    const STATUS_DISABLED = 5;
     const STATUS_ACTIVE = 10;
     const ROLE_USER = 10;
     
@@ -60,10 +61,19 @@ class User extends ActiveRecord implements IdentityInterface
      {
          return [
              ['status', 'default', 'value' => self::STATUS_ACTIVE],
-             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED, self::STATUS_DISABLED]],
 
              ['role', 'default', 'value' => self::ROLE_USER],
              ['role', 'in', 'range' => [self::ROLE_USER]],
+         ];
+     }
+     
+    public function attributeLabels()
+     {
+         return [
+             'status_label' => Yii::t('snapcms', 'Status'),
+             'status' => Yii::t('snapcms', 'Status'),
+             'role' => Yii::t('snapcms', 'Role'),
          ];
      }
 
@@ -197,6 +207,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             self::STATUS_ACTIVE => 'Active',
+            self::STATUS_DISABLED => 'Disabled',
             self::STATUS_DELETED => 'Deleted',
         ];
     }

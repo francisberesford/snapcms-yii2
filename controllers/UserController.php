@@ -24,7 +24,7 @@ class UserController extends SnapCMSController
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
-                    'deleteRole' => ['post'],
+                    //'delete-role' => ['post'],
                 ],
             ],
             'access' => [
