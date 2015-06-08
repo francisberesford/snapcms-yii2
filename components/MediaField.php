@@ -40,7 +40,7 @@ trait MediaField
         $Model = Media::findOne($model->$attributeClean);
         if($Model) {
             $this->parts['{icon}'] = $this->form->getView()->render('@snapcms/views/media/_media_item_frontend', ['model' => $Model]);
-            $deleteName = Html::getInputName($model, $prefix.'_delete_'.$attribute.$suffix);
+            $deleteName = Html::getInputName($model, $prefix.'_delete_'.$attributeClean.$suffix);
             $this->parts['{delete}'] = Html::label(Html::checkbox($deleteName).' '.Yii::t('snapcms', 'Delete?'));
         } else {
             $this->parts['{icon}'] = '';
