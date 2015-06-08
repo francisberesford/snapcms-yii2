@@ -208,7 +208,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             self::STATUS_ACTIVE => 'Active',
             self::STATUS_DISABLED => 'Disabled',
-            self::STATUS_DELETED => 'Deleted',
+            //self::STATUS_DELETED => 'Deleted',
         ];
     }
     
