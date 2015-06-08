@@ -4,8 +4,6 @@ namespace snapcms\components;
 use Yii;
 use snapcms\models\Media;
 use yii\web\UploadedFile;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 
 trait MediaFiles
 {
@@ -28,7 +26,9 @@ trait MediaFiles
             //Are we deleting?
             $formName = $this->formName();
             $name = '_delete_'.$attribute;
-            $deleteMe = ArrayHelper::getValue($_POST, "$formName.$name", false) || ArrayHelper::getValue($_POST, "$formName.$this->id.$name", false);
+            $deleteMe = 
+                (isset($_POST[$formName][$name]) && $_POST[$formName][$name]) || 
+                (isset($_POST[$formName][$this->id][$name]) && $_POST[$formName][$this->id][$name]);
             
             if($deleteMe) {
                 $Media->delete();
