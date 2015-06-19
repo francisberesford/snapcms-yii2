@@ -9,6 +9,8 @@ trait MediaFiles
 {
     public function beforeSave($insert)
     {
+        $id = !empty($this->id) ? $this->id : 'new';
+        
         foreach($this->_mediaFiles as $attribute => $config)
         {            
             if(empty($this->$attribute)) {
@@ -28,7 +30,7 @@ trait MediaFiles
             $name = '_delete_'.$attribute;
             $deleteMe = 
                 (isset($_POST[$formName][$name]) && $_POST[$formName][$name]) || 
-                (isset($_POST[$formName][$this->id][$name]) && $_POST[$formName][$this->id][$name]);
+                (isset($_POST[$formName][$id][$name]) && $_POST[$formName][$id][$name]);
             
             if($deleteMe) {
                 $Media->delete();
@@ -36,8 +38,9 @@ trait MediaFiles
             }
             
             $uploadFile = UploadedFile::getInstance($this, '_'.$attribute);
+            
             if(!$uploadFile) {
-                $uploadFile = UploadedFile::getInstance($this, "[$this->id]_".$attribute);
+                $uploadFile = UploadedFile::getInstance($this, "[$id]_".$attribute);
             }
             
             if($uploadFile) 
