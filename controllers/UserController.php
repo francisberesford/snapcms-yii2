@@ -32,6 +32,11 @@ class UserController extends SnapCMSController
                 'rules' => [
                     [
                         'allow' => true,
+                        'actions' => ['login-as'],
+                        'roles' => ['@']
+                    ],
+                    [
+                        'allow' => true,
                         'actions' => ['index'],
                         'roles' => ['Create User','Update User','Delete User'],
                     ],
@@ -145,6 +150,40 @@ class UserController extends SnapCMSController
             Yii::$app->session->setFlash('success', Yii::t('snapcms', 'User Deleted'));
         }
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Login as a different user
+     * @param integer $id
+     * @throws NotFoundHttpException
+     */
+    public function actionLoginAs($id)
+    {
+        $session = Yii::$app->session;
+        $curUser = Yii::$app->user->identity;
+
+        if (Yii::$app->authManager->checkAccess($curUser->id, 'Admin') || $session->has('shadow_id'))
+        {
+            $User = $this->findModel($id);
+
+            if (!$session->has('shadow_id'))
+            {
+                $session->set('shadow_id', $curUser->id);
+                $session->set('shadow_name', $curUser->username);
+            } else {
+                $session->remove('shadow_id');
+                $session->remove('shadow_name');
+            }
+
+            Yii::$app->user->login($User, 3600 * 24 * 30);
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        if ($session->has('shadow_id'))
+            $this->redirect(Yii::$app->urlManagerFrontend->createUrl(['site/index']));
+        else
+            $this->redirect(['user/index']);
     }
     
     /**
