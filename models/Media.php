@@ -37,9 +37,9 @@ class Media extends \yii\db\ActiveRecord
         return [
             [['is_public', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['title'], 'string', 'max' => 255],
+            [['title', 'mime_type'], 'string', 'max' => 255],
             [['filename'], 'file'],
-            [['mime_type', 'extension'], 'string', 'max' => 45]
+            [['extension'], 'string', 'max' => 45]
         ];
     }
 
@@ -179,9 +179,20 @@ class Media extends \yii\db\ActiveRecord
         return $this->dir_path . '/filename_' . $this->id;
     }
     
+    public function isCsv()
+    {
+        $mimes = array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
+        return in_array($this->mime_type, $mimes);
+    }
+    
     public function getCsvData()
     {
-        $file = @fopen($this->file_path, "r");
+        return self::readCsvData($this->file_path);
+    }
+    
+    public static function readCsvData($filepath) 
+    {
+        $file = @fopen($filepath, "r");
         if(!$file)
             return false;
      

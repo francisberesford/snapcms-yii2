@@ -2,26 +2,28 @@
 namespace snapcms\components;
 
 use Yii;
-use snapcms\models\Media;
 use yii\web\UploadedFile;
 
 trait MediaFiles
 {
+    private $_mediaClass = '\snapcms\models\Media';
+    
     public function beforeSave($insert)
     {
         $id = !empty($this->id) ? $this->id : 'new';
         
         foreach($this->_mediaFiles as $attribute => $config)
-        {            
+        {
+            $class = isset($config['class']) ? $config['class'] : $this->_mediaClass;
             if(empty($this->$attribute)) {
-                $Media = new Media;
+                $Media = new $class;
             } else {
-                $Media = Media::findOne($this->$attribute);
+                $Media = $class::findOne($this->$attribute);
             }
             
             //Our media item as dissapeared! (maybe from deletion in the media manager)
             if(!$Media) {
-                $Media = new Media;
+                $Media = new $class;
                 $this->$attribute = null;
             }
             
@@ -53,8 +55,9 @@ trait MediaFiles
                     //remove extension from the title
                     $Media->title = basename($uploadFile->name, '.' . $Media->extension) . ' (' . $this->id . ')';
                 //}
-                $Media->save();
-                $Media->generateTags($this,  $attribute);
+                if($Media->save()) {
+                    $Media->generateTags($this,  $attribute);
+                }
                 $this->$attribute = $Media->id;
             }
         }
@@ -76,8 +79,9 @@ trait MediaFiles
 
         foreach($this->_mediaFiles as $attribute => $config)
         {
+            $class = isset($config['class']) ? $config['class'] : $this->_mediaClass;
             if(!empty($this->$attribute)) {
-                $Media = Media::findOne($this->$attribute);
+                $Media = $class::findOne($this->$attribute);
             } else {
                 continue;
             }
