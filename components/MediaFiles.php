@@ -8,14 +8,14 @@ trait MediaFiles
 {
     private $_mediaClass = '\snapcms\models\Media';
     
-    public function beforeSave($insert)
+    public function beforeSave($insert, $forceNew = false)
     {
         $id = !empty($this->id) ? $this->id : 'new';
         
         foreach($this->_mediaFiles as $attribute => $config)
         {
             $class = isset($config['class']) ? $config['class'] : $this->_mediaClass;
-            if(empty($this->$attribute)) {
+            if($forceNew || empty($this->$attribute)) {
                 $Media = new $class;
             } else {
                 $Media = $class::findOne($this->$attribute);
