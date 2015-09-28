@@ -8,10 +8,10 @@ trait MediaFiles
 {
     private $_mediaClass = '\snapcms\models\Media';
     
-    public function beforeSave($insert, $forceNew = false)
+    public function processMediaFiles($forceNew = false)
     {
         $id = !empty($this->id) ? $this->id : 'new';
-        
+
         foreach($this->_mediaFiles as $attribute => $config)
         {
             $class = isset($config['class']) ? $config['class'] : $this->_mediaClass;
@@ -61,6 +61,11 @@ trait MediaFiles
                 $this->$attribute = $Media->id;
             }
         }
+    }
+    
+    public function beforeSave($insert, $forceNew = false)
+    {
+        $this->processMediaFiles($forceNew);
         
         return parent::beforeSave($insert);
     }
@@ -98,5 +103,10 @@ trait MediaFiles
             }
             $Media->refresh(); //reload the uploaded attribute
         }
+    }
+    
+    public function getMediaFilesConfig()
+    {
+        return $this->_mediaFiles;
     }
 }
