@@ -35,7 +35,7 @@ class Media extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_public', 'created_by', 'updated_by'], 'integer'],
+            [['is_public', 'is_tmp', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'mime_type'], 'string', 'max' => 255],
             [['filename'], 'file'],
@@ -55,6 +55,7 @@ class Media extends \yii\db\ActiveRecord
             'mime_type' => Yii::t('snapcms', 'Mime Type'),
             'extension' => Yii::t('snapcms', 'Extension'),
             'is_public' => Yii::t('snapcms', 'Is Public'),
+            'is_tmp' => Yii::t('snapcms', 'Is Temporary'),
             'created_at' => Yii::t('snapcms', 'Created At'),
             'updated_at' => Yii::t('snapcms', 'Updated At'),
             'created_by' => Yii::t('snapcms', 'Created By'),
