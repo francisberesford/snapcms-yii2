@@ -69,7 +69,7 @@ class Tag extends \yii\db\ActiveRecord
                 'items' => self::getList($Tag->id, $startLevel, $page)
             ];
            
-            $item;
+            //$item;
         }
         return $list;
     }

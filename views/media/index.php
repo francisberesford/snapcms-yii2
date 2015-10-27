@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
-use yii\widgets\menu;
+use yii\widgets\Menu;
 use snapcms\models\Tag;
 
 /* @var $this yii\web\View */
