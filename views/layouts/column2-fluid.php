@@ -4,13 +4,13 @@ use yii\bootstrap\Nav;
 
 ?>
 <?php $this->beginContent('@snapcms/views/layouts/outer.php'); ?>
-<div class="container">
+<div class="container-fluid">
     <?= $this->render('_page_top'); ?>
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-lg-10 col-md-9">
             <?php echo $content; ?>
         </div>
-        <div id="sidebar" class="col-md-3">
+        <div id="sidebar" class="col-lg-2 col-md-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     Operations
