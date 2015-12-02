@@ -16,7 +16,9 @@ class AppAsset extends AssetBundle {
     public $css = [
         'css/snapcms.css',
     ];
-    public $js = [];
+    public $js = [
+        'js/snapcms.js',
+    ];
     public $depends = [
         'yii\web\YiiAsset',
         'snapcms\assets\FontAwesomeAsset',

@@ -73,6 +73,9 @@ AppAsset::register($this);
             <?= $content ?>
         </div>
 
+        <!--- Ajax Lightbox Content --->
+        <div id="ajax-area"></div>
+
         <footer>
             <div class="container">
                 <p class="pull-left">&copy; 2014 <a href="http://www.snapfrozen.com">Snapfrozen</a> All Rights Reserved</p>
