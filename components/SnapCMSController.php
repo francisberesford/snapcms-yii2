@@ -2,6 +2,7 @@
 namespace snapcms\components;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 /**
@@ -28,7 +29,7 @@ class SnapCMSController extends Controller
             }
             if(is_object($module) && is_subclass_of($module, '\snapcms\components\SnapCMSModule')) 
             {
-                static::$primaryMenu = yii\helpers\ArrayHelper::merge(
+                static::$primaryMenu = ArrayHelper::merge(
                     static::$primaryMenu,
                     $module::$primaryMenu
                 );

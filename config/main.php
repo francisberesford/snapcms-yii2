@@ -7,6 +7,7 @@ return [
     'modules' => [],
     'components' => [
         'user' => [
+            'class' => 'snapcms\components\User',
             'identityClass' => 'snapcms\models\User',
             'enableAutoLogin' => true,
         ],
