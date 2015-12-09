@@ -154,10 +154,13 @@ class UserController extends SnapCMSController
 
     /**
      * Login as a different user
+     *
      * @param integer $id
+     * @param bool    $destroy
+     *
      * @throws NotFoundHttpException
      */
-    public function actionLoginAs($id)
+    public function actionLoginAs($id, $destroy = false)
     {
         $session = Yii::$app->session;
         $curUser = Yii::$app->user->identity;
@@ -170,7 +173,7 @@ class UserController extends SnapCMSController
             {
                 $session->set('shadow_id', $curUser->id);
                 $session->set('shadow_name', $curUser->username);
-            } else {
+            } else if ($destroy) {
                 $session->remove('shadow_id');
                 $session->remove('shadow_name');
             }
