@@ -16,22 +16,25 @@ use yii\web\NotFoundHttpException;
 class User extends BaseUser
 {
     /**
+     * Check identity of the shadow user rather than
+     * switch identity back to shadow user may cause problem
+     * with ckfinder upload folder
+     *
      * @inheritdoc
      */
-    public function init()
+    public function can($permissionName, $params = [], $allowCaching = true)
     {
-        parent::init();
-
         $session = Yii::$app->session;
+
         if ($shadow_id = $session->get('shadow_id')) {
             $User = SnapCmsUser::findOne($shadow_id);
-
             if ($User === null) {
                 throw new NotFoundHttpException('The requested page does not exist.');
             }
 
-            // Switch identity back to the user who used login-as function
-            $this->identity = $User;
+            return $this->getAuthManager()->checkAccess($User->id, $permissionName, $params);
         }
+
+        return parent::can($permissionName, $params = [], $allowCaching = true);
     }
 }
