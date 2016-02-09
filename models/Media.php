@@ -21,6 +21,14 @@ use yii\web\UploadedFile;
  */
 class Media extends \yii\db\ActiveRecord
 {
+    public $mediaRules = [
+        [['is_public', 'is_tmp', 'created_by', 'updated_by'], 'integer'],
+        [['created_at', 'updated_at'], 'safe'],
+        [['title', 'mime_type'], 'string', 'max' => 255],
+        [['filename'], 'file'],
+        [['extension'], 'string', 'max' => 45]
+    ];
+    
     /**
      * @inheritdoc
      */
@@ -34,13 +42,7 @@ class Media extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['is_public', 'is_tmp', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['title', 'mime_type'], 'string', 'max' => 255],
-            [['filename'], 'file'],
-            [['extension'], 'string', 'max' => 45]
-        ];
+        return $this->mediaRules;
     }
 
     /**

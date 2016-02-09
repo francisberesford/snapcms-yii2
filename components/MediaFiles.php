@@ -3,6 +3,7 @@ namespace snapcms\components;
 
 use Yii;
 use yii\web\UploadedFile;
+use yii\helpers\ArrayHelper;
 
 trait MediaFiles
 {
@@ -47,6 +48,9 @@ trait MediaFiles
             
             if($uploadFile) 
             {
+                $rules = ArrayHelper::getValue($config, 'rules', []);
+                $Media->mediaRules = ArrayHelper::merge($Media->mediaRules, $rules);
+                
                 $Media->filename = $uploadFile;
                 $Media->mime_type = $uploadFile->type;
                 $Media->extension = pathinfo($uploadFile->name, PATHINFO_EXTENSION);
@@ -57,6 +61,12 @@ trait MediaFiles
                 //}
                 if($Media->save()) {
                     $Media->generateTags($this,  $attribute);
+                } else {
+                    foreach($Media->errors as $attr) {
+                        foreach($attr as $error) {
+                            $this->addError($attribute, $error);
+                        }
+                    }
                 }
                 $this->$attribute = $Media->id;
             }
