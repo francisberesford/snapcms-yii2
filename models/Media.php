@@ -184,7 +184,7 @@ class Media extends \yii\db\ActiveRecord
     
     public function isCsv()
     {
-        $mimes = array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
+        $mimes = ['text/plain','text/csv','text/tsv'];
         return in_array($this->mime_type, $mimes);
     }
     
