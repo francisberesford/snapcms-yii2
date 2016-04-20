@@ -208,5 +208,19 @@ class Media extends \yii\db\ActiveRecord
         }
         return $data;
     }
+    
+    public function duplicate()
+    {   
+        $NewMedia = new self;
+        $NewMedia->attributes = $this->attributes;
+        $NewMedia->id = null;
+        $NewMedia->save();
+        
+        if(file_exists($this->file_path)) {
+            copy($this->file_path, $NewMedia->file_path);
+        }
+        
+        return $NewMedia;
+    }
 
 }
