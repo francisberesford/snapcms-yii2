@@ -195,6 +195,7 @@ class Media extends \yii\db\ActiveRecord
     
     public static function readCsvData($filepath) 
     {
+        ini_set('auto_detect_line_endings', true);
         $file = @fopen($filepath, "r");
         if(!$file)
             return false;
@@ -206,6 +207,7 @@ class Media extends \yii\db\ActiveRecord
                 $data[] = $line;
             }
         }
+        ini_set('auto_detect_line_endings', false);
         return $data;
     }
     
