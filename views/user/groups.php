@@ -3,6 +3,7 @@
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
  * @var snapcms\ConfigSearch $searchModel
+ * @var \yii\rbac\ManagerInterface $auth
  */
 
 use yii\widgets\ActiveForm;
@@ -38,6 +39,7 @@ $this->params['breadcrumbs'][] = $currentRole;
 
 $this->params['header'] = $this->title;
 $this->params['headerSubtext'] = $currentRole;
+$current_role = $auth->getRole($currentRole);
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <div class="config-index row">
@@ -66,7 +68,7 @@ $this->params['headerSubtext'] = $currentRole;
                 <?php $name = "auth[$currentRole][$perm]"; ?>
                 <?php $id = Inflector::slug($name); ?>
                 <label for="<?= $id ?>" class="col-md-6">
-                    <?= Html::checkbox($name, isset($selectedPermissions[$perm]), ['id' => $id, 'uncheck' => '0'] ); ?>
+                    <?= Html::checkbox($name, $auth->hasChild($current_role, $data), ['id' => $id, 'uncheck' => '0'] ); ?>
                     <?= $perm ?>
                 </label>
                 <span class="col-md-6 text-muted"><?= $data->description ?></span>
