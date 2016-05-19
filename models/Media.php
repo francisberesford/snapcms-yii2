@@ -184,8 +184,7 @@ class Media extends \yii\db\ActiveRecord
     
     public function isCsv()
     {
-        $mimes = ['text/plain','text/csv','text/tsv'];
-        return in_array($this->mime_type, $mimes);
+        return $this->extension == 'csv';
     }
     
     public function getCsvData()
