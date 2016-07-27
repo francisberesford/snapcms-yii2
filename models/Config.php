@@ -3,6 +3,7 @@
 namespace snapcms\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%config}}".
@@ -54,6 +55,8 @@ class Config extends \yii\db\ActiveRecord
      */
     protected static function fillCache($filedata, $path)
     {
+        $overrides = self::getFileData('_allow_db_override');
+        
         foreach($filedata as $key => $value)
         {
             $newPath = "$path$key.";
@@ -61,7 +64,9 @@ class Config extends \yii\db\ActiveRecord
                 self::fillCache($value, $newPath);
             } else { //must be string
                 $newPath = rtrim($newPath, ".");
-                self::$_configCache[$newPath] = $value;
+                if(!in_array($newPath, array_keys($overrides), 1) && !in_array($newPath, array_values($overrides), 1)) {
+                    self::$_configCache[$newPath] = $value;
+                }
             }
         }
         return self::$_configCache;
@@ -84,7 +89,7 @@ class Config extends \yii\db\ActiveRecord
         $overrides = self::getFileData('_allow_db_override');
 
         //Check if the configuration is overwritten in the database if it's whitelisted.
-        if(in_array($fullPath, array_keys($overrides)))
+        if(in_array($fullPath, array_keys($overrides), 1) || in_array($fullPath, array_values($overrides), 1))
         {
             $Config = self::find()->where('path=:fullPath',[':fullPath'=>$fullPath])->one();
             if ($Config) 
@@ -92,13 +97,22 @@ class Config extends \yii\db\ActiveRecord
                 self::$_configCache[$fullPath] = $Config->value;
                 return $Config->value;
             }
+            else 
+            {
+                //Value not in database, get the file value
+                list($filePath, $confLoc) = explode('/', $fullPath);
+                $fullConf = self::getFileData($filePath, $location);
+                self::$_configCache[$fullPath] = ArrayHelper::getValue($fullConf, $confLoc);
+            }
         }
+        else
+        {
+            list($filePath, $confLoc) = explode('/', $fullPath);
 
-        list($filePath, $confLoc) = explode('/', $fullPath);
-        
-        //Fill cache with file data
-        $fullConf = self::getFileData($filePath, $location);
-        self::fillCache($fullConf, $filePath.'/');
+            //Fill cache with file data
+            $fullConf = self::getFileData($filePath, $location);
+            self::fillCache($fullConf, $filePath.'/');
+        }
         
         //If the config still doesn't exist throw Exception.
         if(!isset(self::$_configCache[$fullPath])) {
