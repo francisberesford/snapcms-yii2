@@ -3,6 +3,7 @@
 namespace snapcms\models;
 
 use Yii;
+use snapcms\components\ActiveRecord;
 
 /**
  * This is the model class for table "{{%tags}}".
@@ -11,7 +12,7 @@ use Yii;
  * @property string $name
  * @property integer $parent
  */
-class Tag extends \yii\db\ActiveRecord
+class Tag extends ActiveRecord
 {
 
     /**

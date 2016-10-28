@@ -3,6 +3,7 @@
 namespace snapcms\models;
 
 use Yii;
+use snapcms\components\ActiveRecord;
 
 /**
  * This is the model class for table "snap_log".
@@ -14,7 +15,7 @@ use Yii;
  * @property string $prefix
  * @property string $message
  */
-class Log extends \yii\db\ActiveRecord
+class Log extends ActiveRecord
 {
     /**
      * @inheritdoc
