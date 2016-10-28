@@ -4,6 +4,7 @@ namespace snapcms\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use snapcms\components\ActiveRecord;
 
 /**
  * This is the model class for table "{{%config}}".
@@ -11,7 +12,7 @@ use yii\helpers\ArrayHelper;
  * @property string $path
  * @property string $value
  */
-class Config extends \yii\db\ActiveRecord
+class Config extends ActiveRecord
 {
     protected static $_configCache = array();
     public $validator = '\yii\validators\StringValidator';

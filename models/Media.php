@@ -4,6 +4,7 @@ namespace snapcms\models;
 
 use Yii;
 use yii\web\UploadedFile;
+use snapcms\components\ActiveRecord;
 
 /**
  * This is the model class for table "{{%media}}".
@@ -19,7 +20,7 @@ use yii\web\UploadedFile;
  * @property integer $created_by
  * @property integer $updated_by
  */
-class Media extends \yii\db\ActiveRecord
+class Media extends ActiveRecord
 {
     public $mediaRules = [
         [['is_public', 'is_tmp', 'created_by', 'updated_by'], 'integer'],
