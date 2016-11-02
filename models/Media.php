@@ -19,6 +19,9 @@ use snapcms\components\ActiveRecord;
  * @property string $updated_at
  * @property integer $created_by
  * @property integer $updated_by
+ *
+ * Relation
+ * @property User $user
  */
 class Media extends ActiveRecord
 {
@@ -64,6 +67,14 @@ class Media extends ActiveRecord
             'created_by' => Yii::t('snapcms', 'Created By'),
             'updated_by' => Yii::t('snapcms', 'Updated By'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
     
     public function beforeSave($insert) 
