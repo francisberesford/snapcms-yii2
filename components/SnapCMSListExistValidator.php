@@ -6,7 +6,7 @@ use yii\validators\ExistValidator;
 use yii\base\InvalidConfigException;
 
 /**
- * Class SnapCMSConfigExistValidator
+ * Class SnapCMSListExistValidator
  *
  * Use this class to validate the values in
  * the input separate by defined separator (eg: ',')
@@ -14,7 +14,7 @@ use yii\base\InvalidConfigException;
  * @author Jackson Tong <tongtoan2704@gmail.com>
  * @package snapcms\components
  */
-class SnapCMSConfigExistValidator extends ExistValidator
+class SnapCMSListExistValidator extends ExistValidator
 {
     /**
      * input seperator default is ','
